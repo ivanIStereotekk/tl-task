@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Дерево подразделений</title>
+    <style>
+        ul { list-style-type: none; }
+        .department { margin-left: 20px; font-weight: bold; }
+        .employee { margin-left: 40px; }
+    </style>
+</head>
+<body>
+    <h1>Структура подразделений</h1>
+    <ul>
+        {% for department in departments %}
+            {% if not department.parent %}
+                <li class="department">
+                    {{ department.name }}
+                    <ul>
+                        {% for emp in department.employees.all %}
+                            <li class="employee">{{ emp.full_name }} - {{ emp.position }}</li>
+                        {% endfor %}
+                        {% for sub in department.children.all %}
+                            <li class="department">
+                                {{ sub.name }}
+                                <ul>
+                                    {% for emp in sub.employees.all %}
+                                        <li class="employee">{{ emp.full_name }} - {{ emp.position }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+</body>
+</html>
