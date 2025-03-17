@@ -28,10 +28,10 @@
                         {% if not department.parent %}
                             <li class="mb-2">
                                 <span class="toggle-btn">▶</span>
-                                <span class="department text-primary">{{ department.name }}</span>
+                                <span class="department text-primary">{{ department.name }} - {{department.city}}</span>
                                 <ul class="children list-unstyled ms-3">
                                     {% for emp in department.employees.all %}
-                                        <li class="employee text-secondary">👤 {{ emp.full_name }} - {{ emp.position }}</li>
+                                        <li class="employee text-secondary">👤 {{ emp.full_name }} - {{ emp.position }} | {{emp.salary}}</li>
                                     {% endfor %}
                                     {% for sub in department.children.all %}
                                         <li>
